@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Data</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Patient Information</h1>
+    <table id="patientData"></table>
+    <button onclick="backToForm()">Back to Form</button>
+
+    <script>
+        window.onload = function() {
+            const data = JSON.parse(localStorage.getItem('patientData'));
+            const table = document.getElementById('patientData');
+            
+            for (const [key, value] of Object.entries(data)) {
+                const row = table.insertRow();
+                const cell1 = row.insertCell(0);
+                const cell2 = row.insertCell(1);
+                cell1.innerHTML = key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1').trim();
+                cell2.innerHTML = value;
+            }
+        }
+
+        function backToForm() {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
